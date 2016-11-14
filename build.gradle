@@ -1,0 +1,30 @@
+apply plugin: 'war'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile 'javax:javaee-api:7.0'
+    compile 'org.eclipse.collections:eclipse-collections:8.0.0'
+    compile 'org.apache.commons:commons-lang3:3.5'
+    compile 'ch.qos.logback:logback-classic:1.1.7'
+    compile 'org.flywaydb:flyway-core:4.0.3'
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:3.5.2'
+    testCompile 'de.bechte.junit:junit-hierarchicalcontextrunner:4.12.1'
+}
+
+war.baseName = 'app'
+
+task deploy(type: Exec, dependsOn: war) {
+    def payaraHome = System.env.PAYARA_HOME
+    def asadmin = /$payaraHome\bin\asadmin.bat/
+
+    commandLine('cmd', '/C', asadmin, 'deploy', '--force=true', war.archivePath)
+}
