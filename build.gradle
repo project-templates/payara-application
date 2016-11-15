@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     providedCompile 'javax:javaee-api:7.0'
+    providedCompile 'org.projectlombok:lombok:1.16.10'
     compile 'org.eclipse.collections:eclipse-collections:8.0.0'
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'ch.qos.logback:logback-classic:1.1.7'

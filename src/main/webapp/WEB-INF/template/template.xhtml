@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head jsfc="h:head">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <h:outputStylesheet library="css" name="bootstrap/bootstrap.min.css" />
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+    </head>
+    <body jsfc="h:body">
+        <nav class="navbar navbar-default">
+            <div class="nav-header">
+                <a class="navbar-brand" href="#{request.contextPath}">Home</a>
+            </div>
+        </nav>
+        <div class="container">
+            <ui:insert name="content">
+            </ui:insert>
+        </div>
+    </body>
+</html>
