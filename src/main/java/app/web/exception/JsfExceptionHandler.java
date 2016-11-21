@@ -1,6 +1,6 @@
 package app.web.exception;
 
-import app.common.InvalidException;
+import app.common.exception.InvalidException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.faces.application.FacesMessage;
