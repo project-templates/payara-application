@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class JdbcHelper implements Closeable {
         try {
             this.con = dataSource.getConnection();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("failed to get connection.", e);
         }
     }
 
@@ -95,6 +96,7 @@ public class JdbcHelper implements Closeable {
         List<T> list = this.selectList(sql, converter, parameters);
 
         if (list.isEmpty()) {
+            log.debug("list is empty.");
             return noResultSupplier.get();
         } else if (list.size() != 1) {
             throw new MultiResultRecordException(sql, parameters);
@@ -107,6 +109,10 @@ public class JdbcHelper implements Closeable {
             String sql,
             ResultSetConverter<T> converter,
             Object... parameters) {
+
+        if (log.isDebugEnabled()) {
+            log.debug("sql={}, parameters={}", sql, Arrays.toString(parameters));
+        }
 
         try (PreparedStatement ps = this.con.prepareStatement(sql)) {
             int i = 0;
@@ -124,7 +130,7 @@ public class JdbcHelper implements Closeable {
                 return list;
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("sql=" + sql + ", parameters=" + Arrays.toString(parameters), e);
         }
     }
 
@@ -133,7 +139,7 @@ public class JdbcHelper implements Closeable {
         try {
             this.con.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("failed to close connection", e);
         }
     }
 }
