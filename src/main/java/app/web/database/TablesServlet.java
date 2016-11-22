@@ -26,7 +26,7 @@ public class TablesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection con = this.dataSource.getConnection();
-             PreparedStatement ps = con.prepareStatement("select tablename from sys.systables");
+             PreparedStatement ps = con.prepareStatement("select tablename from sys.systables where TABLETYPE='T'");
              ResultSet rs = ps.executeQuery();) {
 
             List<String> tableNames = new ArrayList<>();
