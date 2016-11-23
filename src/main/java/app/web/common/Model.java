@@ -13,6 +13,7 @@ public class Model implements Serializable {
 
     public Model(HttpServletRequest request) {
         this.request = Objects.requireNonNull(request);
+        this.values.put("hey", "test");
         this.request.setAttribute("model", this.values);
     }
 
