@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet("/database/tables")
 public class TablesServlet extends HttpServlet {
@@ -21,10 +24,27 @@ public class TablesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (JdbcHelper jdbc = new JdbcHelper(this.dataSource)) {
-            List<String> tableNames = jdbc.selectStringList("select tablename from sys.systables where tabletype='T'");
+            List<Map<String, Object>> tables = jdbc.selectList(
+                    " select s.schemaname" +
+                    "       ,t.tablename" +
+                    "   from sys.systables t" +
+                    "       ,sys.sysschemas s" +
+                    "  where t.tabletype='T'" +
+                    "    and s.schemaid = t.schemaid" +
+                    "  order by s.schemaid asc" +
+                    "          ,t.tablename asc",
+                    (rs) -> {
+                        String schemaName = rs.getString(1);
+                        String tableName = rs.getString(2);
+                        Map<String, Object> record = new HashMap<String, Object>();
+                        record.put("schema", schemaName);
+                        record.put("name", tableName);
+
+                        return record;
+                    });
 
             Model model = new Model(req);
-            model.put("tableNames", tableNames);
+            model.put("tables", tables);
 
             req.getRequestDispatcher("/WEB-INF/jsp/database/tables.jsp").forward(req, resp);
         }

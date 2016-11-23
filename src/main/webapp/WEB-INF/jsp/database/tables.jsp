@@ -12,8 +12,8 @@
         <%@include file="/WEB-INF/jsp/database/menu.jsp" %>
 
         <ul>
-            <c:forEach items="${requestScope.model.tableNames}" var="tableName">
-                <li><a href="tables/${tableName}">${tableName}</a></li>
+            <c:forEach items="${requestScope.model.tables}" var="table">
+                <li><a href="tables/${table.name}">${table.schema}.${table.name}</a></li>
             </c:forEach>
         </ul>
     </body>

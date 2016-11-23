@@ -1,6 +1,9 @@
 package app.web.database;
 
 
+import app.common.util.database.JdbcHelper;
+import app.web.common.Model;
+
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet("/database/tables/*")
 public class TableServlet extends HttpServlet {
@@ -24,11 +29,23 @@ public class TableServlet extends HttpServlet {
         String pathInfo = req.getPathInfo();
         String tableName = pathInfo.replace("/", "");
 
-        try (Connection con = this.dataSource.getConnection();
-             PreparedStatement ps = con.prepareStatement("select ");) {
+        try (JdbcHelper jdbc = new JdbcHelper(this.dataSource)) {
+            List<String> columnNames = jdbc.selectStringList(
+                                            "select c.columnname" +
+                                            "  from sys.systables t" +
+                                            "      ,sys.syscolumns c" +
+                                            " where t.tablename = ?" +
+                                            "   and c.referenceid = t.tableid" +
+                                            " order by c.columnnumber asc", tableName);
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            List<Map<String, Object>> records = jdbc.selectMapList("select * from " + tableName);
+
+            Model model = new Model(req);
+            model.put("columnNames", columnNames);
+            model.put("records", records);
+            model.put("tableName", tableName);
         }
+
+        req.getRequestDispatcher("/WEB-INF/jsp/database/table.jsp").forward(req, resp);
     }
 }
