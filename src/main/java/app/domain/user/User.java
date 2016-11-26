@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
@@ -46,6 +47,11 @@ public class User implements Serializable {
         this.password = Objects.requireNonNull(password);
     }
 
+    @PrePersist
+    private void setupId() {
+        this.id = new Id<User>(-1L);
+    }
+    
     @Deprecated
     protected User() {}
 }
