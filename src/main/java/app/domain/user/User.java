@@ -10,6 +10,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -19,14 +20,14 @@ import java.util.Objects;
 public class User implements Serializable {
     @EmbeddedId
     private Id<User> id;
-    @Embedded
+    @Embedded @Valid
     private LoginId loginId;
-    @Embedded
+    @Embedded @Valid
     @AttributeOverride(name="value", column=@Column(name="name"))
     private UserName name;
-    @Embedded
+    @Embedded @Valid
     private Password password;
-    @Embedded
+    @Embedded @Valid
     private MailAddress mailAddress;
 
     public User(LoginId loginId, UserName name) {

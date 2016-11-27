@@ -22,13 +22,15 @@
                 <form jsf:id="form">
                     <div class="form-group">
                         <label for="loginId" class="control-label">ログインID</label>
-                        <input type="text" jsf:id="loginId" value="#{registerUserBean.loginId}"
+                        <h:message for="loginId" errorClass="text-danger" />
+                        <input type="text" jsf:id="loginId" jsf:value="#{registerUserBean.loginId}"
                                class="form-control" required="true" maxlength="32" />
                     </div>
 
                     <div class="form-group">
                         <label for="userName" class="control-label">ユーザー名</label>
-                        <input type="text" jsf:id="userName" value="#{registerUserBean.userName}"
+                        <h:message for="userName" errorClass="text-danger" />
+                        <input type="text" jsf:id="userName" jsf:value="#{registerUserBean.userName}"
                                class="form-control" required="true" maxlength="32" />
                     </div>
 

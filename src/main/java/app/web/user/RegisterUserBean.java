@@ -2,16 +2,24 @@ package app.web.user;
 
 import app.application.user.RegisterUserService;
 import app.application.user.command.RegisterUserCommand;
+import app.domain.user.LoginId;
+import app.domain.user.UserName;
 import app.web.common.JsfUtil;
+import lombok.Data;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 
+@Data
 @Named
 @ViewScoped
-public class RegisterUserBean extends UserBean implements Serializable {
+public class RegisterUserBean implements Serializable {
+//    @LoginId.LoginValidation
+    private String loginId;
+    @UserName.UserNameValidation
+    private String userName;
     
     @Inject
     private RegisterUserService service;

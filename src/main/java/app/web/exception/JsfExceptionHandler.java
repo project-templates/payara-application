@@ -9,7 +9,10 @@ import javax.faces.context.ExceptionHandlerWrapper;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.util.Iterator;
+import java.util.Set;
 
 @Slf4j
 public class JsfExceptionHandler extends ExceptionHandlerWrapper {
@@ -39,6 +42,17 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
                 log.warn(message);
                 FacesContext facesContext = eventContext.getContext();
                 facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+                facesContext.getExternalContext().getFlash().setKeepMessages(true);
+                iterator.remove();
+            } else if (rootCause instanceof ConstraintViolationException) {
+                ConstraintViolationException cve = (ConstraintViolationException)rootCause;
+                Set<ConstraintViolation<?>> violations = cve.getConstraintViolations();
+                FacesContext facesContext = eventContext.getContext();
+                
+                for (ConstraintViolation<?> violation : violations) {
+                    facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, violation.getMessage(), null));
+                }
+                
                 facesContext.getExternalContext().getFlash().setKeepMessages(true);
                 iterator.remove();
             }
