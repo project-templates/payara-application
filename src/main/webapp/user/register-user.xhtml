@@ -21,17 +21,21 @@
                             errorClass="text-danger" />
 
                 <form jsf:id="form">
-                    <comp:textField id="loginId"
-                                    label="ログインID"
-                                    value="#{registerUserBean.loginId}"
-                                    required="true"
-                                    maxlength="32" />
+                    <div class="form-group">
+                        <comp:textField id="loginId"
+                                        label="ログインID"
+                                        value="#{registerUserBean.loginId}"
+                                        required="true"
+                                        maxlength="32" />
+                    </div>
 
-                    <comp:textField id="userName"
-                                    label="ユーザー名"
-                                    value="#{registerUserBean.userName}"
-                                    required="true"
-                                    maxlength="32" />
+                    <div class="form-group">
+                        <comp:textField id="userName"
+                                        label="ユーザー名"
+                                        value="#{registerUserBean.userName}"
+                                        required="true"
+                                        maxlength="32" />
+                    </div>
 
                     <input type="submit" class="btn btn-primary"
                            jsf:action="#{registerUserBean.submit()}" value="登録" />
