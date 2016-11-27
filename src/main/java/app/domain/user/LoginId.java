@@ -48,22 +48,6 @@ public class LoginId implements Serializable {
 
         Class<? extends Payload>[] payload() default {};
     }
-    
-//    public static class LoginValidator implements ConstraintValidator<LoginValidation, String> {
-//        
-//        private static final BeanValidationHelper validator = new BeanValidationHelper()
-//                .pattern("^[a-zA-Z0-9\\-_]+$", "半角英数ハイフンアンダーバーのみ")
-//                .maxLength(32);
-//        
-//        @Override
-//        public void initialize(LoginValidation constraintAnnotation) {
-//        }
-//
-//        @Override
-//        public boolean isValid(String value, ConstraintValidatorContext context) {
-//            return validator.validate(value, context);
-//        }
-//    }
 
     @Deprecated
     protected LoginId() {}

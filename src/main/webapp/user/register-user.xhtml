@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:comp="http://xmlns.jcp.org/jsf/composite/component"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <head>
         <meta charset="UTF-8" />
@@ -20,19 +21,17 @@
                             errorClass="text-danger" />
 
                 <form jsf:id="form">
-                    <div class="form-group">
-                        <label for="loginId" class="control-label">ログインID</label>
-                        <h:message for="loginId" errorClass="text-danger" />
-                        <input type="text" jsf:id="loginId" jsf:value="#{registerUserBean.loginId}"
-                               class="form-control" required="true" maxlength="32" />
-                    </div>
+                    <comp:textField id="loginId"
+                                    label="ログインID"
+                                    value="#{registerUserBean.loginId}"
+                                    required="true"
+                                    maxlength="32" />
 
-                    <div class="form-group">
-                        <label for="userName" class="control-label">ユーザー名</label>
-                        <h:message for="userName" errorClass="text-danger" />
-                        <input type="text" jsf:id="userName" jsf:value="#{registerUserBean.userName}"
-                               class="form-control" required="true" maxlength="32" />
-                    </div>
+                    <comp:textField id="userName"
+                                    label="ユーザー名"
+                                    value="#{registerUserBean.userName}"
+                                    required="true"
+                                    maxlength="32" />
 
                     <input type="submit" class="btn btn-primary"
                            jsf:action="#{registerUserBean.submit()}" value="登録" />
