@@ -28,6 +28,10 @@ public class LoginId implements Serializable {
         this.value = value;
     }
 
+    public String asString() {
+        return this.value;
+    }
+
 
     @Pattern(regexp="^[a-zA-Z0-9\\-_]+$", message="ログインIDは半角英数ハイフンアンダーバーのみで入力してください")
     @Size.List({

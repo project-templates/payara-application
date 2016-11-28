@@ -55,4 +55,12 @@ public class User implements Serializable {
     
     @Deprecated
     protected User() {}
+
+    public String getLoginIdAsString() {
+        return this.loginId.asString();
+    }
+
+    public String getUserNameAsString() {
+        return this.name.asString();
+    }
 }

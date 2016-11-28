@@ -8,4 +8,5 @@ import lombok.ToString;
 public abstract class UserCommand {
     protected String loginId;
     protected String userName;
+    protected String mailAddress;
 }

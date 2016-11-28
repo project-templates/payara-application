@@ -37,6 +37,14 @@
                                         maxlength="32" />
                     </div>
 
+                    <div class="form-group">
+                        <comp:textField id="mailAddress"
+                                        type="email"
+                                        label="メールアドレス"
+                                        value="#{registerUserBean.mailAddress}"
+                                        maxlength="128" />
+                    </div>
+
                     <input type="submit" class="btn btn-primary"
                            jsf:action="#{registerUserBean.submit()}" value="登録" />
                 </form>

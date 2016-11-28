@@ -11,12 +11,13 @@
         <composite:attribute name="value" />
         <composite:attribute name="required" default="false" />
         <composite:attribute name="maxlength" default="" />
+        <composite:attribute name="type" default="text" />
     </composite:interface>
 
     <composite:implementation>
         <label for="#{cc.attrs.id}" class="control-label">#{cc.attrs.label}</label>
         <h:message for="#{cc.attrs.id}" errorClass="text-danger" />
-        <input type="text" jsf:id="#{cc.attrs.id}" jsf:value="#{cc.attrs.value}"
+        <input type="#{cc.attrs.type}" jsf:id="#{cc.attrs.id}" jsf:value="#{cc.attrs.value}"
                class="form-control" required="#{cc.attrs.required}" maxlength="#{cc.attrs.maxlength}" />
     </composite:implementation>
 </html>

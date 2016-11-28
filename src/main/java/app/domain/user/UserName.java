@@ -33,6 +33,10 @@ public class UserName implements Serializable {
         }
     }
 
+    public String asString() {
+        return this.value;
+    }
+
     @Size.List({
         @Size(min=1, message = "ユーザー名は{min}文字以上で入力してください"),
         @Size(max = 32, message = "ユーザー名は{max}文字以下で入力してください")
