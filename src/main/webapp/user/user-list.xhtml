@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:comp="http://xmlns.jcp.org/jsf/composite/component"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <meta charset="UTF-8" />
+        <title>ユーザー一覧</title>
+    </head>
+    <body>
+        <ui:composition template="/WEB-INF/template/template.xhtml">
+            <ui:define name="title">ユーザー一覧</ui:define>
+            <ui:define name="content">
+                <h1>ユーザー一覧</h1>
+                
+                <h:messages globalOnly="true"
+                            styleClass="list-unstyled h3"
+                            infoClass="text-primary"
+                            errorClass="text-danger" />
+                
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

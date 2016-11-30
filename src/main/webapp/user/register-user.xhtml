@@ -38,11 +38,9 @@
                     </div>
 
                     <div class="form-group">
-                        <comp:textField id="mailAddress"
-                                        type="email"
-                                        label="メールアドレス"
-                                        value="#{registerUserBean.mailAddress}"
-                                        maxlength="128" />
+                        <comp:mailAddress id="mailAddress"
+                                          label="メールアドレス"
+                                          value="#{registerUserBean.mailAddress}" />
                     </div>
 
                     <input type="submit" class="btn btn-primary"

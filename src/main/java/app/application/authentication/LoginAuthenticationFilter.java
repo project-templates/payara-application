@@ -33,7 +33,8 @@ public class LoginAuthenticationFilter implements Filter {
     
     private boolean needsLoginCheck(ServletRequest request) {
         return !this.isLoginPage(request)
-                && !this.isCssRequest(request);
+                && !this.isCssRequest(request)
+                && !this.isJsRequest(request);
     }
     
     private boolean isLoginPage(ServletRequest request) {
@@ -42,6 +43,10 @@ public class LoginAuthenticationFilter implements Filter {
     
     private boolean isCssRequest(ServletRequest request) {
         return Objects.equals(http(request).getParameter("ln"), "css");
+    }
+    
+    private boolean isJsRequest(ServletRequest request) {
+        return Objects.equals(http(request).getParameter("ln"), "js");
     }
     
     private HttpServletRequest http(ServletRequest request) {
