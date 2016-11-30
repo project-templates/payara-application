@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:comp="http://xmlns.jcp.org/jsf/composite/component"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <meta charset="UTF-8" />
+        <title>ログイン</title>
+    </head>
+    <body>
+        <ui:composition template="/WEB-INF/template/template.xhtml">
+            <ui:define name="title">ログイン</ui:define>
+            <ui:define name="content">
+                <h1>ログイン</h1>
+                
+                <h:messages globalOnly="true"
+                            styleClass="list-unstyled h3"
+                            infoClass="text-primary"
+                            errorClass="text-danger" />
+
+                <form jsf:id="form">
+                    <div class="form-group">
+                        <comp:textField id="loginId"
+                                        label="ログインID"
+                                        value="#{loginBean.loginId}"
+                                        required="true" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <comp:textField id="password"
+                                        type="password"
+                                        label="パスワード"
+                                        value="#{loginBean.password}"
+                                        required="true" />
+                    </div>
+
+                    <input type="submit" class="btn btn-primary"
+                           jsf:action="#{loginBean.submit()}" value="ログイン" />
+                </form>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

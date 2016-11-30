@@ -10,7 +10,7 @@ CREATE TABLE USERS (
 );
 
 INSERT INTO USERS (LOGIN_ID, NAME, PASSWORD, MAIL_ADDRESS)
-VALUES ('admin', '管理者', 'test', 'admin@test.com');
+VALUES ('admin', '管理者', 'sha1:64000:18:iivp9EIHkQxPlQ+dyq7srjZiVzbsjaz/:raUJxzJ05cFOyJeDEWKSRRdE', 'admin@test.com');
 
 INSERT INTO USERS (LOGIN_ID, NAME, PASSWORD, MAIL_ADDRESS)
-VALUES ('general', '一般ユーザ', 'test', 'user@test.com');
+VALUES ('general', '一般ユーザ', 'sha1:64000:18:j0qyVtx4l2VktaTRop+8/lgDm2DYFSdZ:BJWohfo3dzuh4O40JrOhgkDp', 'user@test.com');

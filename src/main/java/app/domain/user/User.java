@@ -14,6 +14,9 @@ import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * ユーザー.
+ */
 @Entity
 @Table(name="users")
 @ToString
@@ -34,6 +37,15 @@ public class User implements Serializable {
         this.loginId = Objects.requireNonNull(loginId, "ログインIDに null は指定できません");
         this.name = Objects.requireNonNull(name, "ユーザー名に null は指定できません");
         this.password = Password.newPassword();
+    }
+
+    /**
+     * このユーザが持つパスワードと指定した平文のパスワードが等しいか検証します.
+     * @param plainPassword 平文のパスワード
+     * @return パスワードが等しい場合は true
+     */
+    public boolean isValidPassword(String plainPassword) {
+        return this.password.isEquals(plainPassword);
     }
 
     public void setMailAddress(MailAddress mailAddress) {
