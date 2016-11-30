@@ -13,6 +13,13 @@
         <nav class="navbar navbar-default">
             <div class="nav-header">
                 <a class="navbar-brand" href="#{request.contextPath}">Home</a>
+                <ul class="nav navbar-nav">
+                    <ui:fragment rendered="#{loginUser.isLoggedIn()}">
+                        <li>
+                            <a href="${request.contextPath}/system/logout">ログアウト</a>
+                        </li>
+                    </ui:fragment>
+                </ul>
             </div>
         </nav>
         <div class="container">
