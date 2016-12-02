@@ -11,4 +11,10 @@
       WHERE user.loginId.value = :loginId
     ]]></query>
     </named-query>
+    <named-query name="User.findAll">
+        <query><![CDATA[
+     SELECT user
+       FROM User user
+    ]]></query>
+    </named-query>
 </entity-mappings>
