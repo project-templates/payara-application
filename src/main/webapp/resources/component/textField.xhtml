@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:composite="http://xmlns.jcp.org/jsf/composite">
 
     <composite:interface>
@@ -15,9 +16,15 @@
     </composite:interface>
 
     <composite:implementation>
-        <label for="#{cc.attrs.id}" class="control-label">#{cc.attrs.label}</label>
-        <h:message for="#{cc.attrs.id}" errorClass="text-danger" />
-        <input type="#{cc.attrs.type}" jsf:id="#{cc.attrs.id}" jsf:value="#{cc.attrs.value}"
-               class="form-control" required="#{cc.attrs.required}" maxlength="#{cc.attrs.maxlength}" />
+        <div id="#{cc.clientId}">
+            <c:set var="textValue" value="#{cc.clientId}_textValue" />
+            textValue = #{textValue}
+            <div class="#{not requestScope[textValue].valid ? 'has-error' : ''}">
+                <label for="#{cc.attrs.id}" class="control-label">#{cc.attrs.label}</label>
+                <input type="#{cc.attrs.type}" id="#{cc.attrs.id}" jsf:value="#{cc.attrs.value}"
+                       binding="#{requestScope[textValue]}"
+                       class="form-control" required="#{cc.attrs.required}" maxlength="#{cc.attrs.maxlength}" />
+            </div>
+        </div>
     </composite:implementation>
 </html>
