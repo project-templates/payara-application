@@ -2,6 +2,7 @@ package app.infrastructure.user;
 
 import app.domain.user.LoginId;
 import app.domain.user.User;
+import app.domain.user.UserList;
 import app.domain.user.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -27,6 +28,13 @@ public class JpaUserRepository implements UserRepository {
         } catch (NoResultException e) {
             return Optional.empty();
         }
+    }
+
+    @Override
+    public UserList findAll() {
+        return new UserList(
+            this.em.createNamedQuery("User.findAll", User.class).getResultList()
+        );
     }
 
     @Override
